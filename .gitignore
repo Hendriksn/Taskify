@@ -1,0 +1,19 @@
+# Binäre Dateien
+*.exe
+*.dll
+*.pdb
+
+# NuGet-Pakete
+/packages/
+
+# Build-Verzeichnisse
+/bin/
+/obj/
+
+# Temporäre Dateien
+*.user
+*.vscode
+*.suo
+*.cache
+*.log
+*.vs
