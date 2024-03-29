@@ -1,1 +1,17 @@
-/* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.orangeButton {
+    box-shadow: 0px 0px 7px 0px #ff6348;
+    background:linear-gradient(to right bottom, #ff6348 5%, #ffcc02 100%);
+    background-color:#ffcc02;
+    display:inline-block;
+    cursor:pointer;
+    color:#FFFFFF;
+    font-family: MPLUSRounded1c-ExtraBold, serif;
+    font-weight: bold;
+    text-decoration:none;
+  }
+  

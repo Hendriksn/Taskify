@@ -1,0 +1,28 @@
+<div class="max-w-md mx-auto mt-8">
+
+    @if(editMode){
+        <h3>Todo bearbeiten: </h3>
+        <div class="flex items-center space-x-2">
+            <input type="text" [value]="todoText" (change)="changeTodoText($event)" class="border border-gray-300 px-3 py-2 rounded-md flex-grow">
+            <button (click)="updateTodo()" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md">OK</button> 
+        </div>
+    }@else {
+        <h3 class="text-lg font-semibold mb-4">Neue Todo:</h3>
+        <div class="flex items-center space-x-2">
+            <input type="text" [value]="todoText" (change)="changeTodoText($event)" class="border border-gray-300 px-3 py-2 rounded-md flex-grow">
+            <button (click)="addTodo()" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md">OK</button> 
+        </div>
+    }
+
+    <ul class="mt-5">
+        @for(todo of todos; track $index){
+            <li class="flex items-center justify-between py-2 border-b border-gray-200">
+                <span (click) ="editTodo($index)" tabindex="0" (keypress)="editTodo($index)">{{todo.text}}</span>
+                <button (click)="removeTodo($index)" class="text-red-500 hover:text-red-600">X</button> 
+            </li>
+        }   
+        @empty {
+            <li class="text-gray-500">Keine Todos vorhanden</li>
+        }
+    </ul>
+</div>
