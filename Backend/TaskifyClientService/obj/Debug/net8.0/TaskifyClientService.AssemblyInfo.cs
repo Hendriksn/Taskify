@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TaskifyClientService")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e2def81d439c27f939bbae1eef0fe103a0d3c3f1")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+db229abf489624ccac0dda0f9b3b764ced580d85")]
 [assembly: System.Reflection.AssemblyProductAttribute("TaskifyClientService")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TaskifyClientService")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

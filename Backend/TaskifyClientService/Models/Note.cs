@@ -4,6 +4,6 @@
     {
         public int NoteID { get; set; }
         public string Content { get; set; }
-        public ICollection<Task> Task { get; set; }
+       // public Task Task { get; set; }
     }
 }

@@ -13,7 +13,7 @@ namespace TaskifyClientService.Data
         }
 
         public DbSet<Category> Categories { get; set; }
-        public DbSet<Task> Tasks { get; set; }
+      //  public DbSet<Task> Tasks { get; set; }
         public DbSet<Note> Notes { get; set; }
 
      }
