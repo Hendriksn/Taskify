@@ -1,64 +1,52 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { Todo } from '../reducers/todo';
-import {Store } from '@ngrx/store';
-import {State} from "./../reducers/index";
-import * as actions from "../reducers/todolist.actions";
-import { Observable, filter } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
-import { selectTodolist } from '../reducers/todolist.selectors';
 
 @Component({
   selector: 'app-todolist',
   standalone: true,
-  imports: [AsyncPipe],
+  imports: [],
   templateUrl: './todolist.component.html',
   styleUrl: './todolist.component.scss'
 })
 export class TodolistComponent {
-  store = inject<Store<State>>(Store);
-  todoText = "";
-  $todos: Observable<Todo[]> = this.store.select(selectTodolist)
-                                  
-  editMode: boolean = false;
-  updateTodoIndex = -1
-
-
-  constructor(){
-    this.store.subscribe((state)=> {
-      this.todoText = state.todolistState.todoText;
-      this.editMode = state.todolistState.editMode;
-      this.updateTodoIndex = state.todolistState.updateTodoIndex;
-    });
-  }
-
-
-
-changeTodoText(event: Event){
-  this.todoText = (event.target as HTMLInputElement).value
-}
+  todoText = signal("");
+  todos = signal<Todo[]>([]);
+  isEditMode = signal(false);
+  updateTodoIndex = signal(-1);
 
   addTodo(){
-    const todo: Todo = {
-      text: this.todoText,
-      done: false,
-    };
+    const todo: Todo = {text: this.todoText(), done: false};
 
-    this.store.dispatch(actions.addTodo({todo}));
-  }
-
- editTodo(todoIndex: number){
-    this.store.dispatch(actions.editTodo({todoIndex}))
-  }
-  
-
-
-  updateTodo(){
-    this.store.dispatch(actions.updateTodo({
-      todoText: this.todoText}));
+    this.todos.set([...this.todos(), todo]);
+    this.todoText.set("");
   }
 
   removeTodo(todoIndex: number){
-    this.store.dispatch(actions.removeTodo({todoIndex}))  
+    this.todos.set(this.todos().filter((todo, index)=> index != todoIndex));
+  }
+
+  editTodo(todoIndex: number){
+    this.isEditMode.set(true);
+    this.todoText.set(this.todos()[todoIndex].text)
+    this.updateTodoIndex.set(todoIndex)
+  }
+
+  updateTodo(){
+    const newTodos = [...this.todos()];
+    newTodos[this.updateTodoIndex()] = {
+      ...newTodos[this.updateTodoIndex()],
+      text: this.todoText()
+    }
+    this.todos.set(newTodos);
+    this.isEditMode.set(false);
+    this.todoText.set("");
+    this.updateTodoIndex.set(-1);
+  }
+
+
+  changeTodoText(event: Event){
+    this.todoText.set((event.target as HTMLInputElement).value);
   }
 }
 

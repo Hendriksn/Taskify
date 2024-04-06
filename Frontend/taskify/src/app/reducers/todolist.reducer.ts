@@ -6,14 +6,14 @@ import * as actions from "./todolist.actions";
 const initialState: TodolistState = {
     todoText: '',
     todos: [],
-    editMode: false,
+    isEditMode: false,
     updateTodoIndex:-1
 };
 
 export interface TodolistState{
     todoText: string;
     todos: Todo[];
-    editMode: boolean;
+    isEditMode: boolean;
     updateTodoIndex: number;
 };
                                             //hier übergibt man den initialen Zustand
@@ -34,7 +34,7 @@ export const todolistReducer = createReducer(initialState,
     on(actions.editTodo,(todolistState,{todoIndex}): TodolistState => {
         return{
             ...todolistState,
-            editMode: true,
+            isEditMode: true,
             todoText: todolistState.todos[todoIndex].text,
             updateTodoIndex: todoIndex
         }
@@ -49,7 +49,7 @@ export const todolistReducer = createReducer(initialState,
         return{
             ...todolistState,
             todos: newTodos,
-            editMode: false,
+            isEditMode: false,
             todoText: "",
             updateTodoIndex: -1
         }
